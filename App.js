@@ -6,16 +6,39 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
+  NativeModules,
+  Platform,
 } from 'react-native';
 
+const {VoiceChangingModule} = NativeModules;
+
+const AUDIO =
+  'https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_5MG.mp3';
+
 export const App = () => {
+  const changeToAlien = () => {
+    Platform.OS === 'android' && VoiceChangingModule.changeToAlien(AUDIO);
+  };
+
+  const changeToChild = () => {
+    Platform.OS === 'android' && VoiceChangingModule.changeToChild(AUDIO);
+  };
+
+  const changeToFast = () => {
+    Platform.OS === 'android' && VoiceChangingModule.speedUp(AUDIO);
+  };
+
+  const changeToSlow = () => {
+    Platform.OS === 'android' && VoiceChangingModule.slowDown(AUDIO);
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor={'#e4e5ea'} />
       <Text style={styles.title}>Voice Changer</Text>
       <Text style={styles.title}> Change Voice Effects </Text>
       <View style={styles.iconsContainer}>
-        <TouchableOpacity onPress={() => null}>
+        <TouchableOpacity onPress={changeToAlien}>
           <Image
             source={{
               uri: 'https://icons.iconarchive.com/icons/google/noto-emoji-smileys/256/10101-alien-icon.png',
@@ -25,7 +48,7 @@ export const App = () => {
           />
           <Text>Alien</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => null}>
+        <TouchableOpacity onPress={changeToChild}>
           <Image
             source={{
               uri: 'https://pics.freeicons.io/uploads/icons/png/2793494581535699799-512.png',
@@ -35,7 +58,7 @@ export const App = () => {
           />
           <Text>Child</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => null}>
+        <TouchableOpacity onPress={changeToFast}>
           <Image
             source={{
               uri: 'https://www.pngjoy.com/pngl/346/6457386_black-arrows-fast-forward-symbol-transparent-png-download.png',
@@ -45,7 +68,7 @@ export const App = () => {
           />
           <Text>Fast</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => null}>
+        <TouchableOpacity onPress={changeToSlow}>
           <Image
             source={{
               uri: 'https://img.pngio.com/action-motion-play-slow-icon-slow-motion-png-512_512.png',
